@@ -67,7 +67,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init DCM
-
+//    dcm_init(); // todo-hossam
 
 
 
@@ -79,10 +79,10 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init LED x4
-    led_init()
-
-
-
+    led_init(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN);
+    led_init(SHORT_SIDE_LED_PORT, SHORT_SIDE_LED_PIN);
+    led_init(ROTATING_LED_PORT, ROTATING_LED_PIN);
+    led_init(STOPPED_LED_PORT, STOPPED_LED_PIN);
 
 
 
@@ -94,6 +94,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init init start btn
+    //btn_init(START_BTN_PORT, START_BTN_PIN); // todo-hossam
 
 
 
@@ -103,7 +104,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init init stop btn (interrupt)
-
+    //btn_init(STOP_BTN_PORT, STOP_BTN_PIN); // todo-hossam
 
 
 
