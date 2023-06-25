@@ -25,14 +25,14 @@ static en_app_state_t gl_en_current_app_state = APP_STATE_STOPPED;
 
 
 /* Private Macros */
-#define RED_LED_PORT 		LED_PORT_F // Port F
-#define RED_LED_PIN			LED_PIN_1
+#define LONG_SIDE_LED_PORT 		LED_PORT_F // Port F
+#define LONG_SIDE_LED_PIN			LED_PIN_1
 
-#define GREEN_LED_PORT 	    LED_PORT_F // Port F
-#define GREEN_LED_PIN		LED_PIN_3
+#define SHORT_SIDE_LED_PORT 	    LED_PORT_F // Port F
+#define SHORT_SIDE_LED_PIN		LED_PIN_3
 
-#define BLUE_LED_PORT 	    LED_PORT_F // Port F
-#define BLUE_LED_PIN		LED_PIN_2
+#define ROTATING_LED_PORT 	    LED_PORT_F // Port F
+#define ROTATING_LED_PIN		LED_PIN_2
 
 #define START_BTN_PORT		BTN_PORT_F // Port F
 #define START_BTN_PIN		BTN_PIN_4
@@ -80,7 +80,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init LED x4
-
+    led_init()
 
 
 
