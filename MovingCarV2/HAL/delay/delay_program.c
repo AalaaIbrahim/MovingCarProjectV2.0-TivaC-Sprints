@@ -33,11 +33,20 @@ en_delay_status_t delay_init(void)
 en_delay_status_t delay_start(uint32_t_ uint32_a_time, en_gpt_time_unit_t en_a_gpt_time_unit)
 {
     en_delay_status_t en_delay_status_retval = DELAY_OK;
-    en_gpt_status_t en_gpt_status = gpt_start(DELAY_GPT_CHANNEL, uint32_a_time, en_a_gpt_time_unit);
 
-    if(en_gpt_status != GPT_OK)
+    if(FALSE == gl_bool_shutdown)
     {
-        en_delay_status_retval = DELAY_ERROR;
+        en_gpt_status_t en_gpt_status = gpt_start(DELAY_GPT_CHANNEL, uint32_a_time, en_a_gpt_time_unit);
+
+        if(en_gpt_status != GPT_OK)
+        {
+            en_delay_status_retval = DELAY_ERROR;
+        }
+    }
+    else
+    {
+        // driver is off
+        en_delay_status_retval = DELAY_INVALID_STATE;
     }
 
     return en_delay_status_retval;
@@ -53,9 +62,48 @@ en_delay_status_t delay_stop()
 {
     en_delay_status_t en_delay_status_retval = DELAY_OK;
 
-    if(GPT_OK != gpt_stop(DELAY_GPT_CHANNEL))
+    if(FALSE == gl_bool_shutdown)
+    {
+        if(GPT_OK != gpt_stop(DELAY_GPT_CHANNEL))
+        {
+            en_delay_status_retval = DELAY_ERROR;
+        }
+    }
+    else
+    {
+        // driver is off
+        en_delay_status_retval = DELAY_INVALID_STATE;
+    }
+
+    return en_delay_status_retval;
+}
+
+
+en_delay_status_t delay_shutdown(boolean bool_a_shutdown)
+{
+    en_delay_status_t en_delay_status_retval = DELAY_OK;
+
+    if(bool_a_shutdown != TRUE && bool_a_shutdown != FALSE)
     {
         en_delay_status_retval = DELAY_ERROR;
+    }
+    else
+    {
+        if(TRUE == bool_a_shutdown) // shutdown
+        {
+            if(DELAY_OK != delay_stop())
+            {
+                en_delay_status_retval = DELAY_ERROR;
+            }
+            else
+            {
+                gl_bool_shutdown = bool_a_shutdown;
+            }
+        }
+        else // no shutdown - normal operation
+        {
+            gl_bool_shutdown = FALSE;
+        }
     }
 
     return en_delay_status_retval;
