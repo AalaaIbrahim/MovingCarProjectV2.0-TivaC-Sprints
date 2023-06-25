@@ -8,7 +8,7 @@ st_gpt_config_t gl_st_gpt_lconfig_arr[GPT_CONFIGURED_TIMERS_CHS_COUNT] = {
         {
             CH_0,
             CH_MODE_ONE_SHOT,
-         GPT_INT_ENABLED
+         GPT_INT_DISABLED
          },
          {
             CH_1,
