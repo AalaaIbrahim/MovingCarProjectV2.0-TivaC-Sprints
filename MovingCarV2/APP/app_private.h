@@ -10,8 +10,9 @@
 #ifndef APP_PRIVATE_H_
 #define APP_PRIVATE_H_
 
-/* Private includes */
+/* Private includes line 13 */
 #include "std.h"
+#incld
 
 
 
@@ -32,7 +33,7 @@
 
 
 
-/* Typedefs */
+/* Typedefs line 36 */
 typedef enum{
     APP_STATE_STOPPED     = 0 ,
     APP_STATE_LONG_SIDE       ,
@@ -62,7 +63,7 @@ typedef enum{
 
 
 
-/* Alaa's MACROS */
+/* Alaa's MACROS line 66 */
 
 
 
@@ -89,7 +90,7 @@ typedef enum{
 
 
 
-/* Hossam's MACROS */
+/* Hossam's MACROS line 93 */
 
 
 
@@ -123,7 +124,7 @@ typedef enum{
 
 
 
-
+// line 127
 static void app_switch_state();
 
 static void app_stop_btn_callback();
