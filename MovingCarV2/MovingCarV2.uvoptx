@@ -171,7 +171,7 @@
 
   <Group>
     <GroupName>MAIN</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -431,19 +431,19 @@
 
   <Group>
     <GroupName>APP</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>20</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\APP\app.c</PathWithFileName>
-      <FilenameWithoutPath>app.c</FilenameWithoutPath>
+      <PathWithFileName>.\APP\app_interface.h</PathWithFileName>
+      <FilenameWithoutPath>app_interface.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -454,8 +454,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\APP\app.h</PathWithFileName>
-      <FilenameWithoutPath>app.h</FilenameWithoutPath>
+      <PathWithFileName>.\APP\app_private.h</PathWithFileName>
+      <FilenameWithoutPath>app_private.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>22</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\APP\app_program.c</PathWithFileName>
+      <FilenameWithoutPath>app_program.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

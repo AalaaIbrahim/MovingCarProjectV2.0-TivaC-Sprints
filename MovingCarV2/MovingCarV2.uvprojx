@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -497,14 +498,19 @@
           <GroupName>APP</GroupName>
           <Files>
             <File>
-              <FileName>app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\APP\app.c</FilePath>
+              <FileName>app_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\app_interface.h</FilePath>
             </File>
             <File>
-              <FileName>app.h</FileName>
+              <FileName>app_private.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\APP\app.h</FilePath>
+              <FilePath>.\APP\app_private.h</FilePath>
+            </File>
+            <File>
+              <FileName>app_program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\app_program.c</FilePath>
             </File>
           </Files>
         </Group>
