@@ -14,8 +14,7 @@
 /**********************************************************************************************************************
  * INCLUDES
  *********************************************************************************************************************/
-#include "../../MCAL/dio/dio_interface.h"
-#include "pwm/pwm_interface.h"
+#include "std.h"
 
 
 /**********************************************************************************************************************
@@ -33,19 +32,8 @@ typedef enum
 	DCM_WRONG_DCM_NUMBER,
 	DCM_WRONG_DIRECTION,
 	DCM_NOK
-}en_DCM_error_t;
+}enu_dcm_error_t_;
 
-
-/***************************************_DCM_NUMBERS_***************************************/
-typedef enum
-{
-	DCM_0 = 0,
-	DCM_1,
-	DCM_2,
-	DCM_3,
-	DCM_4,
-	DCM_5
-}en_DCM_number_t;
 
 
 /***************************************_DCM_DIRECTOINS_***************************************/
@@ -53,23 +41,48 @@ typedef enum
 {
 	DCM_CW = 0,
 	DCM_ACW
-}en_DCM_direction_t;
+}enu_dcm_direction_t_;
 
+
+
+typedef enum
+{
+	DCM_PORT_A,
+	DCM_PORT_B,
+	DCM_PORT_C,
+	DCM_PORT_D,
+	DCM_PORT_E,
+	DCM_PORT_F,
+	DCM_PORT_TOTAL
+}enu_dcm_port_t_;
+
+typedef enum
+{
+	DCM_PIN_0 = 0	,
+	DCM_PIN_1		,
+	DCM_PIN_2		,
+	DCM_PIN_3		,
+	DCM_PIN_4		,
+	DCM_PIN_5		,
+	DCM_PIN_6		,
+	DCM_PIN_7		,
+	DCM_PIN_TOTAL
+}enu_dcm_pin_t_;
 
 /**************************_LINKING_CONFIGURATION_STRUCTURE_DATA_TYPE_**************************/	
 typedef struct
 {
-	en_DCM_number_t 	dcmNumber;
-				 u8		dcmPortNumber_0;
-				 u8		dcmPinNumber_0;
-				 u8		dcmPortNumber_1;
-				 u8		dcmPinNumber_1;
-}st_DCM_config_t;
+	uint8_t_ 						uint8_dcm_number;
+	enu_dcm_port_t_			enu_dcm_port_number_0;
+	enu_dcm_pin_t_			enu_dcm_pin_number_0;
+	enu_dcm_port_t_			enu_dcm_port_number_1;
+	enu_dcm_pin_t_			enu_dcm_pin_number_1;
+}str_dcm_config_t_;
 
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-/******************************************************************************
+/**----------------------------------------------------------
 * @Syntax          : en_DCM_error_t DCM_init (void)
 * @Description     : Initializes DCM module
 * @Sync\Async      : Synchronous
@@ -79,7 +92,7 @@ typedef struct
 * @Return value:   : en_DCM_error_t			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_init				(void);
+enu_dcm_error_t_ dcm_init				(void);
 
 /******************************************************************************
 * @Syntax          : en_DCM_error_t DCM_setDirection	
@@ -93,7 +106,7 @@ en_DCM_error_t DCM_init				(void);
 * @Return value:   : en_DCM_error_t			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_setDirection		(en_DCM_number_t en_a_dcmNumber, en_DCM_direction_t en_a_direction);
+enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction);
 
 /******************************************************************************
 * @Syntax          : en_DCM_error_t DCM_speed (u8 u8_a_speed)
@@ -105,7 +118,7 @@ en_DCM_error_t DCM_setDirection		(en_DCM_number_t en_a_dcmNumber, en_DCM_directi
 * @Return value:   : en_DCM_error_t			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_speed			(u8 u8_a_speed);
+enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed);
 
 /******************************************************************************
 * @Syntax          : en_DCM_error_t DCM_start (void)
@@ -117,7 +130,7 @@ en_DCM_error_t DCM_speed			(u8 u8_a_speed);
 * @Return value:   : en_DCM_error_t			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_start			(void);
+enu_dcm_error_t_ dcm_start			(void);
 
 /******************************************************************************
 * @Syntax          : en_DCM_error_t DCM_stop (void)
@@ -129,7 +142,7 @@ en_DCM_error_t DCM_start			(void);
 * @Return value:   : en_DCM_error_t			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_stop				(void);
+enu_dcm_error_t_ dcm_stop				(void);
 
 
 #endif /* DCM_INTERFACE_H_ */

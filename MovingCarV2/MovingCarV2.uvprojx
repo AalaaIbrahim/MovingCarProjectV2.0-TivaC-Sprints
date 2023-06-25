@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\APP;.\HAL\btn;.\HAL\led;.\HAL\pwm;.\LIB;.\MCAL\gpio;.\MCAL\gpt;.\HAL\delay</IncludePath>
+              <IncludePath>.\APP;.\HAL\btn;.\HAL\led;.\HAL\pwm;.\LIB;.\MCAL\gpio;.\MCAL\gpt;.\HAL\delay;.\HAL\dcm</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -503,6 +503,16 @@
               <FileName>delay_program.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HAL\delay\delay_program.c</FilePath>
+            </File>
+            <File>
+              <FileName>dcm_cfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\dcm\dcm_cfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>dcm_program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\dcm\dcm_program.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,4 +1,4 @@
-/**********************************************************************************************************************
+/**
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------
  *
@@ -8,225 +8,263 @@
  *		 @Author:	Ahmed Hesham
  *  @Description:  	Linking configuration file for DC Motor module     
  *  
- *********************************************************************************************************************/
+ */
 
-/**********************************************************************************************************************
+/**----------------------------------------------------------
  *  INCLUDES
- *********************************************************************************************************************/
+ *----------------------------------------------------------*/
 #include "dcm_interface.h"
 #include "dcm_cfg.h"
-/**********************************************************************************************************************
+#include "gpio_interface.h"
+#include "pwm_interface.h"
+/**----------------------------------------------------------
  *  GLOBAL DATA
- *********************************************************************************************************************/
-extern const st_DCM_config_t st_DCM_config [NUMBER_OF_DCMS_USED];
+ *----------------------------------------------------------*/
+extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
  
- /**********************************************************************************************************************
+ /**----------------------------------------------------------
  *  GLOBAL FUNCTION IMPLEMENTATION
- *********************************************************************************************************************/
-/******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_init (void)
+ *----------------------------------------------------------*/
+/**----------------------------------------------------------
+* @Syntax          : enu_dcm_error_t_ DCM_init (void)
 * @Description     : Initializes DCM module
 * @Sync\Async      : Synchronous
 * @Reentrancy      : Reentrant
 * @Parameters (in) : None
 * @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
+* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
 *											DCM_NOK = 1
-*******************************************************************************/
-en_DCM_error_t DCM_init	(void)
+*----------------------------------------------------------*/
+enu_dcm_error_t_ dcm_init (void)
 {
-	en_DCM_error_t returnValue = DCM_OK;
-	for (u8 counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
+	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	
+	st_gpio_cfg_t str_pins_used;
+	
+	str_pins_used.current = PIN_CURRENT_2MA;
+	str_pins_used.pin_cfg = OUTPUT;
+	for (uint8_t_ counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
 	{
-		if (DIO_setPinDir( st_DCM_config[counter].dcmPortNumber_0, st_DCM_config[counter].dcmPinNumber_0, OUTPUT))
+		str_pins_used.port = str_dcm_config[counter].enu_dcm_port_number_0;
+		str_pins_used.pin = str_dcm_config[counter].enu_dcm_pin_number_0;
+			
+		if (GPIO_OK != gpio_pin_init(&str_pins_used))
 		{
-			returnValue = DCM_NOK;
+			enu_return_value = DCM_NOK;
 			break;
 		}
 		else
 		{
-			/*returnValue = DCM_OK*/
-		}
-		if (DIO_setPinDir(st_DCM_config[counter].dcmPortNumber_1, st_DCM_config[counter].dcmPinNumber_1, OUTPUT))
-		{
-			returnValue = DCM_NOK;
-			break;
-		}
-		else
-		{
-			/*returnValue = DCM_OK*/	
+			str_pins_used.port = str_dcm_config[counter].enu_dcm_port_number_1;
+			str_pins_used.pin = str_dcm_config[counter].enu_dcm_pin_number_1;
+			if (GPIO_OK != gpio_pin_init(&str_pins_used))
+			{
+				enu_return_value = DCM_NOK;
+				break;
+			}
+			else
+			{
+				
+			}
 		}
 	}
-	if (PWM_init())
+	
+	if (DCM_OK == enu_return_value)
 	{
-		returnValue = DCM_NOK;
+		if (PWM_OK != pwm_init())
+		{
+			enu_return_value = DCM_NOK;
+		}
+		else
+		{
+			/*enu_return_value = DCM_OK*/
+		}
 	}
 	else
 	{
-		/*returnValue = DCM_OK*/
+		/*DCM_NOK*/
 	}
-	
-	return returnValue;
+	return enu_return_value;
 	
 }
 
 /******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_setDirection
-*					 (en_DCM_number_t en_a_dcmNumber, en_DCM_direction_t en_a_direction)
+* @Syntax          : enu_dcm_error_t_ DCM_setDirection
+*					 (en_DCM_number_t uint8_dcm_index, en_DCM_direction_t en_a_direction)
 * @Description     : Sets Directions for the a specific DCM
 * @Sync\Async      : Synchronous
 * @Reentrancy      : Reentrant
-* @Parameters (in) : en_DCM_number_t		en_a_dcmNumber
+* @Parameters (in) : en_DCM_number_t		uint8_dcm_index
 *					 en_DCM_direction_t		en_a_direction
 * @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
+* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_setDirection		(en_DCM_number_t en_a_dcmNumber, en_DCM_direction_t en_a_direction)
+enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction)
 {
-	en_DCM_error_t returnValue = DCM_OK;
+	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
-	for (u8 counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
+	for (uint8_t_ counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
 	{
-		returnValue = DCM_WRONG_DCM_NUMBER;
-		if (en_a_dcmNumber == st_DCM_config[counter].dcmNumber)
+		enu_return_value = DCM_WRONG_DCM_NUMBER;
+		if (uint8_dcm_index == str_dcm_config[counter].uint8_dcm_number)
 		{
-			returnValue = DCM_OK;
-			switch(en_a_direction)
+			enu_return_value = DCM_OK;
+			if(DCM_CW == enu_direction)
 			{
-				
-				case DCM_CW:
-				if (DIO_setPinVal(st_DCM_config[counter].dcmPortNumber_0, st_DCM_config[counter].dcmPinNumber_0,HIGH))
+				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_0, str_dcm_config[counter].enu_dcm_pin_number_0,HIGH))
 				{
-					returnValue = DCM_NOK;
+					enu_return_value = DCM_NOK;
 				}
 				else
 				{
-					/*returnValue = DCM_OK*/
+					/*enu_return_value = DCM_OK*/
+					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_1, str_dcm_config[counter].enu_dcm_pin_number_1,LOW))
+					{
+						enu_return_value = DCM_NOK;
+					}
+					else
+					{
+						/*enu_return_value = DCM_OK*/
+					}
 				}
-				if (DIO_setPinVal(st_DCM_config[counter].dcmPortNumber_1, st_DCM_config[counter].dcmPinNumber_1,LOW))
+			}
+			else if (DCM_ACW == enu_direction)
+			{
+				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_0, str_dcm_config[counter].enu_dcm_pin_number_0,LOW))
 				{
-					returnValue = DCM_NOK;
+					enu_return_value = DCM_NOK;
 				}
 				else
 				{
-					/*returnValue = DCM_OK*/
+					/*enu_return_value = DCM_OK*/
+					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_1, str_dcm_config[counter].enu_dcm_pin_number_1,HIGH))
+					{
+						enu_return_value = DCM_NOK;
+					}
+					else
+					{
+						/*enu_return_value = DCM_OK*/
+					}
 				}
-				break;
-				case DCM_ACW:
-				if (DIO_setPinVal(st_DCM_config[counter].dcmPortNumber_0, st_DCM_config[counter].dcmPinNumber_0,LOW))
-				{
-					returnValue = DCM_NOK;
-				}
-				else
-				{
-					/*returnValue = DCM_OK*/
-				}
-				if (DIO_setPinVal(st_DCM_config[counter].dcmPortNumber_1, st_DCM_config[counter].dcmPinNumber_1,HIGH))
-				{
-					returnValue = DCM_NOK;
-				}
-				else
-				{
-					/*returnValue = DCM_OK*/
-				}
-				break;
-				default:
-				returnValue = DCM_WRONG_DIRECTION;
-				break;
+			}
+			else
+			{
+				enu_return_value = DCM_WRONG_DIRECTION;
 			}
 			break;
 		}
 	}
-	return returnValue;
+	return enu_return_value;
 }
 
 
 /******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_speed (u8 u8_a_speed)
+* @Syntax          : enu_dcm_error_t_ DCM_speed (uint8_t_ uint8_t__a_speed)
 * @Description     : Sets speed for DCMs
 * @Sync\Async      : Synchronous
 * @Reentrancy      : Reentrant
-* @Parameters (in) : u8						u8_a_speed
+* @Parameters (in) : uint8_t_						uint8_t__a_speed
 * @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
+* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_speed (u8 u8_a_speed)
+enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 {
-	en_DCM_error_t returnValue = DCM_OK;
+	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
-	if (u8_a_speed <= 100)
+	if (uint8_speed <= 100)
 	{
-		if(PWM_setDutyCycle(u8_a_speed))
+		if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_1, uint8_speed, 10))
 		{
-			returnValue = DCM_NOK;
+			enu_return_value = DCM_NOK;
 		}
 		else
 		{
-			/*returnValue = DCM_OK*/
+			if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_2, uint8_speed, 10))
+			{
+				enu_return_value = DCM_NOK;
+			}
+			else
+			{
+				/*DCM_OK*/
+			}
 		}
 	}
 	else
 	{
-		returnValue = DCM_NOK;
+		enu_return_value = DCM_NOK;
 	}
 	
-	return returnValue;
+	return enu_return_value;
 }
 
 
 /******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_start (void)
+* @Syntax          : enu_dcm_error_t_ DCM_start (void)
 * @Description     : Starts DCMs to rotate
 * @Sync\Async      : Synchronous
 * @Reentrancy      : Reentrant
 * @Parameters (in) : None
 * @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
+* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_start (void)
+enu_dcm_error_t_ dcm_start (void)
 {
-	en_DCM_error_t returnValue = DCM_OK;
+	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
-	if (PWM_start())
+	if (PWM_OK != pwm_start(PWM_CHANNEL_1))
 	{
-		returnValue = DCM_NOK;
+		enu_return_value = DCM_NOK;
 	}
 	else
 	{
-		/*returnValue = DCM_OK*/
+		if (PWM_OK != pwm_start(PWM_CHANNEL_2))
+		{
+			enu_return_value = DCM_NOK;
+		}
+		else
+		{
+			/*DCM_OK*/
+		}
 	}
-	return returnValue;
+	return enu_return_value;
 }
 
 
 /******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_stop (void)
+* @Syntax          : enu_dcm_error_t_ DCM_stop (void)
 * @Description     : Stops DCMs from rotating
 * @Sync\Async      : Synchronous
 * @Reentrancy      : Reentrant
 * @Parameters (in) : None
 * @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
+* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
 *											DCM_NOK = 1
 *******************************************************************************/
-en_DCM_error_t DCM_stop	(void)
+enu_dcm_error_t_ dcm_stop	(void)
 {
-	en_DCM_error_t returnValue = DCM_OK;
+	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
-	if (PWM_stop())
+	if (pwm_stop(PWM_CHANNEL_1))
 	{
-		returnValue = DCM_NOK;
+		enu_return_value = DCM_NOK;
 	}
 	else
 	{
-		/*returnValue = DCM_OK*/
+		if (pwm_stop(PWM_CHANNEL_1))
+		{
+			enu_return_value = DCM_NOK;
+		}
+		else
+		{
+			/*DCM_OK*/
+		}
 	}
 	
-	return returnValue;
+	return enu_return_value;
 }
 /**********************************************************************************************************************
- *  END OF FILE: dcm_cfg.c
+ *  END OF FILE: dcm_program.c
  *********************************************************************************************************************/
