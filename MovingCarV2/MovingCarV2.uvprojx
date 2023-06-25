@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\APP;.\HAL\btn;.\HAL\led;.\HAL\pwm;.\LIB;.\MCAL\gpio;.\MCAL\gpt</IncludePath>
+              <IncludePath>.\APP;.\HAL\btn;.\HAL\led;.\HAL\pwm;.\LIB;.\MCAL\gpio;.\MCAL\gpt;.\HAL\delay</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

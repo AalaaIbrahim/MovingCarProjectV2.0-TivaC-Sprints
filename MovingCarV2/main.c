@@ -14,7 +14,7 @@
 
 #ifdef TEST
     #include "led_interface.h"
-    #include "gpt_interface.h"
+    #include "delay_interface.h"
     static void test_gpt_blocking_delay(void);
 #endif
 
@@ -47,13 +47,13 @@ int main(void)
     {
         led_init(LED_PORT_F, LED_PIN_1);
         led_on(LED_PORT_F, LED_PIN_1);
-        gpt_init();
+        delay_init();
         while(1)
         {
             led_on(LED_PORT_F, LED_PIN_1);
-            gpt_start(CH_0, 1000, TIME_IN_MS);
+            delay_start(1000, TIME_IN_MS);
             led_off(LED_PORT_F,LED_PIN_1);
-            gpt_start(CH_0, 1000, TIME_IN_MS);
+            delay_start(1000, TIME_IN_MS);
         }
     }
 #endif
