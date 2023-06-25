@@ -18,4 +18,12 @@ en_delay_status_t delay_init(void);
 
 en_delay_status_t delay_start(uint32_t_ uint32_a_time, en_gpt_time_unit_t en_a_gpt_time_unit);
 
+/**
+ * @brief               :   Immediately stops a delay
+ *
+ * @return  DELAY_OK    :   If Successful
+ *          DELAY_ERROR :   If failed
+ */
+en_delay_status_t delay_stop();
+
 #endif //SHARED_DELAY_INTERFACE_H

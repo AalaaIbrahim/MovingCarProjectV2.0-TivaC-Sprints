@@ -225,7 +225,10 @@ en_gpt_status_t gpt_start(en_gpt_channel_t en_a_gpt_channel, uint32_t_ uint32_a_
                         the status flags are cleared by writing a 1 to the appropriate bit of the GPTM Interrupt Clear
                         Register (GPTMICR) */
 
-                    while(0 == GET_BIT(GET_ADDRESS_FROM_OFFSET(uint32_l_base_address ,GPTMRIS_REG_OFFSET), GPTMRIS_TATORIS)); // wait for timer
+                    while(
+                            (0 == GET_BIT(GET_ADDRESS_FROM_OFFSET(uint32_l_base_address ,GPTMRIS_REG_OFFSET), GPTMRIS_TATORIS)) &&
+                            (1 == GET_BIT(GET_ADDRESS_FROM_OFFSET(uint32_l_base_address, GPTMCTL_REG_OFFSET), GPTMCTRL_A_EN_BIT))
+                            ); // wait for timer
 
                     // set bit to clear flag
                     SET_BIT(GET_ADDRESS_FROM_OFFSET(uint32_l_base_address, GPTMICR_REG_OFFSET), GPTMICR_TATOCINT_BIT);
