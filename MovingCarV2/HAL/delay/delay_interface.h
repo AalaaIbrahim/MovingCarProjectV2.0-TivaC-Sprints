@@ -7,6 +7,8 @@
 
 #include "gpt_interface.h"
 
+#define DELAY_GPT_CHANNEL CH_0
+
 typedef enum
 {
     DELAY_OK    = 0     ,
@@ -45,6 +47,14 @@ en_delay_status_t delay_start(uint32_t_ uint32_a_time, en_gpt_time_unit_t en_a_g
  */
 en_delay_status_t delay_stop();
 
+/**
+ * @brief                   :   Immediately shuts down module
+ *
+ * @param   bool_a_shutdown :   true: shutdown, false: normal operation
+ *
+ * @return  DELAY_OK    :   If Successful
+ *          DELAY_ERROR :   If failed
+ */
 en_delay_status_t delay_shutdown(boolean bool_a_shutdown);
 
 #endif //SHARED_DELAY_INTERFACE_H

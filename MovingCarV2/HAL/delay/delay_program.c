@@ -4,7 +4,7 @@
 
 #include "delay_interface.h"
 
-#define DELAY_GPT_CHANNEL CH_0
+
 
 /**
  * @brief               :   Initializes delay module
