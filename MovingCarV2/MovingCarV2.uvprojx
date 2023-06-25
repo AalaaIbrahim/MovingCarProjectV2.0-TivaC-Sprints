@@ -492,6 +492,16 @@
               <FileType>1</FileType>
               <FilePath>.\HAL\pwm\pwm_program.c</FilePath>
             </File>
+            <File>
+              <FileName>delay_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL\delay\delay_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay_program.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL\delay\delay_program.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
