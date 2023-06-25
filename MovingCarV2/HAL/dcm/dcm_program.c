@@ -2,10 +2,10 @@
  *  FILE DESCRIPTION
  *  -----------------------------------------------------------------------------------------------------------------
  *
- *         @Date:  	5:14 PM Monday, May 15, 2023
- *		   @File:  	dcm_program.c         
- *		 @Module:  	DC Motor
- *		 @Author:	Ahmed Hesham
+ *  @Date:  				5:14 PM Monday, May 15, 2023
+ *	@File:  				dcm_program.c         
+ *	@Module:  			DC Motor
+ *	@Author:				Ahmed Hesham
  *  @Description:  	Linking configuration file for DC Motor module     
  *  
  */
@@ -25,17 +25,14 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
  /**----------------------------------------------------------
  *  GLOBAL FUNCTION IMPLEMENTATION
  *----------------------------------------------------------*/
-/**----------------------------------------------------------
-* @Syntax          : enu_dcm_error_t_ DCM_init (void)
-* @Description     : Initializes DCM module
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
-*											DCM_NOK = 1
-*----------------------------------------------------------*/
-enu_dcm_error_t_ dcm_init (void)
+/**
+ *	@brief				Initializes DCM module
+ *	@param [in]		none	
+ *	@param [out]	none	
+ *	@return				DCM_OK						:	In case of success
+ *	@return				DCM_NOK						:	In case of failure
+ */
+ enu_dcm_error_t_ dcm_init (void)
 {
 	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
@@ -88,19 +85,17 @@ enu_dcm_error_t_ dcm_init (void)
 	
 }
 
-/******************************************************************************
-* @Syntax          : enu_dcm_error_t_ DCM_setDirection
-*					 (en_DCM_number_t uint8_dcm_index, en_DCM_direction_t en_a_direction)
-* @Description     : Sets Directions for the a specific DCM
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : en_DCM_number_t		uint8_dcm_index
-*					 en_DCM_direction_t		en_a_direction
-* @Parameters (out): None
-* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction)
+/**
+ *	@brief				Sets Directions for the a specific DCM
+ *	@param [in]		uint8_dcm_index				:	motor's number
+ *	@param [in]		enu_direction					:	motor's direction
+ *	@param [out]	none	
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_WRONG_DIRECTION		:	In case of sending wrong direction
+ * 	@return				DCM_WRONG_DCM_NUMBER	:	In case of sending wrong DCM number
+ *	@return				DCM_NOK								:	In case of failure
+ */
+ enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction)
 {
 	enu_dcm_error_t_ enu_return_value = DCM_OK;
 	
@@ -159,16 +154,13 @@ enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t
 }
 
 
-/******************************************************************************
-* @Syntax          : enu_dcm_error_t_ DCM_speed (uint8_t_ uint8_t__a_speed)
-* @Description     : Sets speed for DCMs
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : uint8_t_						uint8_t__a_speed
-* @Parameters (out): None
-* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
+/**
+ *	@brief				Sets speed for DCMs
+ *	@param [in]		uint8_speed					:	motors' speed
+ *	@param [out]	none	
+ *	@return				DCM_OK							:	In case of success
+ *	@return				DCM_NOK							:	In case of failure
+ */
 enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 {
 	enu_dcm_error_t_ enu_return_value = DCM_OK;
@@ -200,16 +192,13 @@ enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 }
 
 
-/******************************************************************************
-* @Syntax          : enu_dcm_error_t_ DCM_start (void)
-* @Description     : Starts DCMs to rotate
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
+/**
+ *	@brief				Starts DCMs to rotate
+ *	@param [in]		none
+ *	@param [out]	none	
+ *	@return				DCM_OK							:	In case of success
+ *	@return				DCM_NOK							:	In case of failure
+ */
 enu_dcm_error_t_ dcm_start (void)
 {
 	enu_dcm_error_t_ enu_return_value = DCM_OK;
@@ -233,16 +222,13 @@ enu_dcm_error_t_ dcm_start (void)
 }
 
 
-/******************************************************************************
-* @Syntax          : enu_dcm_error_t_ DCM_stop (void)
-* @Description     : Stops DCMs from rotating
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : enu_dcm_error_t_			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
+/**
+ *	@brief				Stops DCMs from rotating
+ *	@param [in]		none
+ *	@param [out]	none	
+ *	@return				DCM_OK							:	In case of success
+ *	@return				DCM_NOK							:	In case of failure
+ */
 enu_dcm_error_t_ dcm_stop	(void)
 {
 	enu_dcm_error_t_ enu_return_value = DCM_OK;
@@ -265,6 +251,6 @@ enu_dcm_error_t_ dcm_stop	(void)
 	
 	return enu_return_value;
 }
-/**********************************************************************************************************************
+/**----------------------------------------------------------
  *  END OF FILE: dcm_program.c
- *********************************************************************************************************************/
+ *----------------------------------------------------------*/

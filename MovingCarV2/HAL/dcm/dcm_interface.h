@@ -1,31 +1,26 @@
-/**********************************************************************************************************************
+/**
  *  FILE DESCRIPTION
  *-------------------------------------------------------------------------------------------------------------------
- *		   @Date:  	2:38 PM Sunday, May 14, 2023
- *		   @File:  	dcm_interface.h         
- *		 @Module:  	DC Motor
- *		 @Author:	Ahmed Hesham
+ *	@Date:  				2:38 PM Sunday, May 14, 2023
+ *	@File:  				dcm_interface.h         
+ *	@Module:  			DC Motor
+ *	@Author:				Ahmed Hesham
  *  @Description:  	Interfacing file for DC Motor module     
  *  
- *********************************************************************************************************************/
+ */
 #ifndef DCM_INTERFACE_H_
 #define DCM_INTERFACE_H_
 
-/**********************************************************************************************************************
+/**----------------------------------------------------------
  * INCLUDES
- *********************************************************************************************************************/
+ *----------------------------------------------------------*/
 #include "std.h"
 
 
-/**********************************************************************************************************************
- *  GLOBAL CONSTANT MACROS
- *********************************************************************************************************************/
-
-
-/**********************************************************************************************************************
+/**----------------------------------------------------------
  *  GLOBAL DATA TYPES AND STRUCTURES
- *********************************************************************************************************************/
-/***************************************_ERROR_TYPES_***************************************/
+ *----------------------------------------------------------*/
+/*-----------------------_ERROR_TYPES_-----------------------*/
 typedef enum
 {
 	DCM_OK = 0,
@@ -34,17 +29,14 @@ typedef enum
 	DCM_NOK
 }enu_dcm_error_t_;
 
-
-
-/***************************************_DCM_DIRECTOINS_***************************************/
+/*-----------------------_DCM_DIRECTOINS_-----------------------*/
 typedef enum 
 {
 	DCM_CW = 0,
 	DCM_ACW
 }enu_dcm_direction_t_;
 
-
-
+/*-----------------------_DCM_PORTS_-----------------------*/
 typedef enum
 {
 	DCM_PORT_A,
@@ -56,6 +48,7 @@ typedef enum
 	DCM_PORT_TOTAL
 }enu_dcm_port_t_;
 
+/*-----------------------_DCM_PINS_-----------------------*/
 typedef enum
 {
 	DCM_PIN_0 = 0	,
@@ -68,84 +61,75 @@ typedef enum
 	DCM_PIN_7		,
 	DCM_PIN_TOTAL
 }enu_dcm_pin_t_;
-
-/**************************_LINKING_CONFIGURATION_STRUCTURE_DATA_TYPE_**************************/	
+  
+/*-------------------------_LINKING_CONFIGURATION_STRUCTURE_DATA_TYPE_-------------------------*/	
 typedef struct
 {
-	uint8_t_ 						uint8_dcm_number;
+	uint8_t_ 				uint8_dcm_number;
 	enu_dcm_port_t_			enu_dcm_port_number_0;
 	enu_dcm_pin_t_			enu_dcm_pin_number_0;
 	enu_dcm_port_t_			enu_dcm_port_number_1;
 	enu_dcm_pin_t_			enu_dcm_pin_number_1;
 }str_dcm_config_t_;
 
-/**********************************************************************************************************************
- *  GLOBAL FUNCTION PROTOTYPES
- *********************************************************************************************************************/
 /**----------------------------------------------------------
-* @Syntax          : en_DCM_error_t DCM_init (void)
-* @Description     : Initializes DCM module
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_init				(void);
+ *  GLOBAL FUNCTION PROTOTYPES
+ *----------------------------------------------------------*/
 
-/******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_setDirection	
-*					 (en_DCM_number_t en_a_dcmNumber, en_DCM_direction_t en_a_direction)
-* @Description     : Sets Directions for the a specific DCM
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : en_DCM_number_t		en_a_dcmNumber
-*					 en_DCM_direction_t		en_a_direction
-* @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction);
+/**
+ *	@brief				Initializes DCM module
+ *	@param [in]		none	
+ *	@param [out]	none	
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_NOK								:	In case of failure
+ */
+enu_dcm_error_t_ dcm_init(void);
 
-/******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_speed (u8 u8_a_speed)
-* @Description     : Sets speed for DCMs
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : u8						u8_a_speed
-* @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed);
 
-/******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_start (void)
-* @Description     : Starts DCMs to rotate
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_start			(void);
+/**
+ *	@brief				Sets Directions for the a specific DCM
+ *	@param [in]		uint8_dcm_index				:	motor's number
+ *	@param [in]		enu_direction					:	motor's direction
+ *	@param [out]	none	
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_WRONG_DIRECTION		:	In case of sending wrong direction
+ * 	@return				DCM_WRONG_DCM_NUMBER	:	In case of sending wrong DCM number
+ *	@return				DCM_NOK								:	In case of failure
+ */
+ enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction);
 
-/******************************************************************************
-* @Syntax          : en_DCM_error_t DCM_stop (void)
-* @Description     : Stops DCMs from rotating
-* @Sync\Async      : Synchronous
-* @Reentrancy      : Reentrant
-* @Parameters (in) : None
-* @Parameters (out): None
-* @Return value:   : en_DCM_error_t			DCM_OK = 0
-*											DCM_NOK = 1
-*******************************************************************************/
-enu_dcm_error_t_ dcm_stop				(void);
+
+/**
+ *	@brief				Sets speed for DCMs
+ *	@param [in]		uint8_speed						:	motors' speed
+ *	@param [out]	none		
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_NOK								:	In case of failure
+ */
+ enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed);
+
+
+/**
+ *	@brief				Starts DCMs to rotate
+ *	@param [in]		none
+ *	@param [out]	none	
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_NOK								:	In case of failure
+ */
+ enu_dcm_error_t_ dcm_start	(void);
+
+
+/**
+ *	@brief				Stops DCMs from rotating
+ *	@param [in]		none
+ *	@param [out]	none	
+ *	@return				DCM_OK								:	In case of success
+ *	@return				DCM_NOK								:	In case of failure
+ */
+enu_dcm_error_t_ dcm_stop (void);
 
 
 #endif /* DCM_INTERFACE_H_ */
-/**********************************************************************************************************************
+/**----------------------------------------------------------
  *  END OF FILE: dcm_interface.h
- *********************************************************************************************************************/
+ *----------------------------------------------------------*/
