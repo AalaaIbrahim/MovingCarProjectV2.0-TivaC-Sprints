@@ -36,7 +36,9 @@
 
 /* Typedefs line 36 */
 typedef enum{
-    APP_STATE_STOPPED     = 0 ,
+		APP_STATE_IDLE        = 0 ,
+    APP_STATE_START 					,
+		APP_STATE_STOPPED     		,
     APP_STATE_LONG_SIDE       ,
     APP_STATE_ROTATE          ,
     APP_STATE_SHORT_SIDE      ,
@@ -64,7 +66,34 @@ typedef enum{
 
 
 
-/* Alaa's MACROS line 66 */
+/* Alaa's MACROS */
+#define APP_MOTOR_SPEED_30		30
+#define APP_MOTOR_SPEED_50		50
+
+#define APP_START_TIME				1000
+#define APP_ROTATION_TIME			500
+#define APP_STOP_TIME					500
+#define APP_SHORT_SIDE_TIME		2000
+#define APP_LONG_SIDE_TIME		3000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hossam's MACROS */
 
 
 
@@ -91,7 +120,6 @@ typedef enum{
 
 
 
-/* Hossam's MACROS line 93 */
 
 
 
@@ -101,32 +129,6 @@ typedef enum{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// line 127
-static void app_switch_state();
 
 static void app_stop_btn_callback();
 
