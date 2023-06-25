@@ -34,15 +34,14 @@ static en_app_state_t gl_en_current_app_state = APP_STATE_STOPPED;
 #define ROTATING_LED_PORT 	    LED_PORT_F // Port F
 #define ROTATING_LED_PIN		LED_PIN_2
 
+#define STOPPED_LED_PORT        LED_PORT_E
+#define STOPPED_LED_PIN        LED_PIN_1
+
 #define START_BTN_PORT		BTN_PORT_F // Port F
 #define START_BTN_PIN		BTN_PIN_4
 
 #define STOP_BTN_PORT		BTN_PORT_F // Port F
 #define STOP_BTN_PIN		BTN_PIN_0
-
-
-
-
 
 
 
