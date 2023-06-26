@@ -5,6 +5,9 @@
 #include "gpio_interface.h"
 
 #define BTN_DEBOUNCE_MS_TIME 200
+
+typedef void (* ptr_callback_fun_t)(void);
+
 typedef enum
 {
 	BUTTON_RELEASED = 0,
@@ -25,7 +28,7 @@ typedef enum {
  * @return ERROR_OK 		 : If the initialization is successful
  * 				 BUTTON_NOK		 : If any of the arguments is invalid
  */
-enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin);
+enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, boolean bool_a_int_enabled);
 
 /**
  *
@@ -35,4 +38,7 @@ enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_
  * @return
  */
 enu_error_status_t_ button_get_state(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state);
+
+enu_error_status_t_ button_set_callback(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun);
+
 #endif 
