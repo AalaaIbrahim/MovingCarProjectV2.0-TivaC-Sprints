@@ -67,7 +67,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init DCM
-//    dcm_init(); // todo-hossam
+    dcm_init(); // todo-hossam
 
 
 
@@ -173,35 +173,36 @@ void app_start() // todo-alaa
 			/* Update the Application State */
 			gl_en_current_app_state = APP_STATE_IDLE;
 
-			/* todo: Turn on the stop LED */
-
+			/* Turn on the stop LED */
+			led_on(STOPPED_LED_PORT, STOPPED_LED_PIN);
+			
 			/* Stop the Car */
-			//dcm_stop();
+			dcm_stop();
 		}
 		else if (APP_STATE_LONG_SIDE == gl_en_current_app_state)
 		{
 			/* Update the Application State */
 			gl_en_current_app_state = APP_STATE_ROTATE;
 
-			/* todo: Turn off the stop LED */
+			/* Turn off the stop LED */
+			led_off(STOPPED_LED_PORT, STOPPED_LED_PIN);
 
-
-			/* todo: Turn on the long side LED */
-
+			/* Turn on the long side LED */
+			led_on(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN);
 
 			/* Set Motor Directions */ /* todo: verify on hw */
-			//dcm_setDirection(DCM_0, DCM_CW);
-			//dcm_setDirection(DCM_1, DCM_CW);
+			dcm_set_direction(DCM_0, DCM_CW);
+			dcm_set_direction(DCM_1, DCM_CW);
 
 			/* Set Motor Speed */
-			//dcm_speed(APP_MOTOR_SPEED_50);
+			dcm_speed(APP_MOTOR_SPEED_50);
 
 			/* Start the Car */
-			//dcm_start();
+			dcm_start();
 			delay_start(APP_LONG_SIDE_TIME, TIME_IN_MS);
 
-			/* todo: Turn off the long side LED */
-
+			/* Turn off the long side LED */
+			led_off(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN);
 
 			/* Set the next state */
 			gl_en_app_state_next_side = APP_STATE_SHORT_SIDE;
@@ -211,25 +212,22 @@ void app_start() // todo-alaa
 			/* Update the Application State */
 			gl_en_current_app_state = APP_STATE_ROTATE;
 
-			/* todo: Turn off the stop LED */
-
-			
-			/* todo: Turn on the short side LED */
-			
+			/* Turn on the short side LED */
+			led_on(SHORT_SIDE_LED_PORT, SHORT_SIDE_LED_PIN);
 
 			/* Set Motor Directions */ /* todo: verify on hw */
-			//dcm_setDirection(DCM_0, DCM_CW);
-			//dcm_setDirection(DCM_1, DCM_CW);
+			dcm_set_direction(DCM_0, DCM_CW);
+			dcm_set_direction(DCM_1, DCM_CW);
 
 			/* Set Motor Speed */
-			//dcm_speed(APP_MOTOR_SPEED_30);
+			dcm_speed(APP_MOTOR_SPEED_30);
 
 			/* Move for two seconds */
-			//dcm_start();
+			dcm_start();
 			delay_start(APP_SHORT_SIDE_TIME, TIME_IN_MS);
 
-			/* todo: Turn off the short side LED */
-
+			/* Turn off the short side LED */
+			led_off(SHORT_SIDE_LED_PORT, SHORT_SIDE_LED_PIN);
 
 			/* Update the next side */
 			gl_en_app_state_next_side = APP_STATE_LONG_SIDE;
@@ -239,32 +237,27 @@ void app_start() // todo-alaa
 			/* Update the Application State */
 			gl_en_current_app_state = gl_en_app_state_next_side;
 
-			/* todo: Turn off the stop LED */
-
-
-			/* todo: Turn on the rotation LED */
-
+			/* Turn on the rotation LED */
+			led_on(ROTATING_LED_PORT, ROTATING_LED_PIN);
 
 			/* Stop for 0.5 seconds */
-			//dcm_stop();
+			dcm_stop();
 			delay_start(APP_STOP_TIME, TIME_IN_MS);
 
 			/* Set Motor Directions */
-			//dcm_setDirection(DCM_0, DCM_CW);
-			//dcm_setDirection(DCM_1, DCM_ACW);
+			dcm_set_direction(DCM_0, DCM_CW);
+			dcm_set_direction(DCM_1, DCM_ACW);
 
 			/* Rotate 90 degrees */
-
-
-			//dcm_start();
+			dcm_start();
 			delay_start(APP_ROTATION_TIME, TIME_IN_MS);
 
 			/* Stop for 0.5 seconds */
-			//dcm_stop();
+			dcm_stop();
 			delay_start(APP_STOP_TIME, TIME_IN_MS);
 
-			/* todo: Turn off the rotation LED */
-
+			/* Turn off the rotation LED */
+			led_off(ROTATING_LED_PORT, ROTATING_LED_PIN);
 		}
 		else
 		{

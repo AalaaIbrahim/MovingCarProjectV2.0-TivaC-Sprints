@@ -14,8 +14,8 @@
 #include "std.h"
 #include "led_interface.h"
 #include "delay_interface.h"
-
-
+#include "dcm_interface.h"
+#include "dcm_cfg.h"
 
 
 
