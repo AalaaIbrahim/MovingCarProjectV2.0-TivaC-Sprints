@@ -14,6 +14,7 @@
 /- Includes
 /----------------------------------------------------------*/
 #include "std.h"
+#include "gpt_interface.h"
 
 /*----------------------------------------------------------/
 /- ENUMS
@@ -57,7 +58,7 @@ en_pwm_error_t pwm_init(void);
  *		   PWM_INVALID_CHANNEL : When the passed channel is not supported
  * 		   PWM_ERROR		   : When the duty cycle is invalid (>100)
  */
-en_pwm_error_t pwm_adjust_signal(en_pwm_channel_id_t en_a_channel_id, uint8_t_ u8_a_dutyCycle, uint16_t_ u16_a_msPeriod);
+en_pwm_error_t pwm_adjust_signal(en_pwm_channel_id_t en_a_channel_id, uint8_t_ u8_a_dutyCycle, uint16_t_ u16_a_Period, en_gpt_time_unit_t en_a_period_unit);
 
 /**
  * @brief Start generating pwm signal on the given channel

@@ -70,6 +70,16 @@ typedef enum{
 #define APP_MOTOR_SPEED_30		30
 #define APP_MOTOR_SPEED_50		50
 
+#define APP_START_TIME			1000
+#define APP_ROTATION_TIME		500
+#define APP_STOP_TIME			500
+#define APP_SHORT_SIDE_TIME		1000
+#define APP_LONG_SIDE_TIME		1000
+
+
+/*
+
+
 #define APP_START_TIME				1000
 #define APP_ROTATION_TIME			500
 #define APP_STOP_TIME					500
@@ -77,7 +87,7 @@ typedef enum{
 #define APP_LONG_SIDE_TIME		3000
 
 
-
+*/
 
 
 

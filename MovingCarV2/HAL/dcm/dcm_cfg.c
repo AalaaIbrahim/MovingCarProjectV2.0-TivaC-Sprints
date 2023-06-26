@@ -22,8 +22,8 @@
  const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED] = 
 {
 /*	 DCM_#, PORT0_#,	  PIN0_#*, PORT1_#,    PIN1_#	*/
-	{DCM_0, DCM_PORT_D, DCM_PIN_2, DCM_PORT_D, DCM_PIN_3},
-	{DCM_1, DCM_PORT_D, DCM_PIN_6, DCM_PORT_D, DCM_PIN_7}
+	{DCM_0, DCM_PORT_E, DCM_PIN_2, DCM_PORT_E, DCM_PIN_3},
+	{DCM_1, DCM_PORT_E, DCM_PIN_4, DCM_PORT_E, DCM_PIN_5}
 };
  
 /**----------------------------------------------------------

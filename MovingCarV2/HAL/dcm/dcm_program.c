@@ -17,6 +17,9 @@
 #include "dcm_cfg.h"
 #include "gpio_interface.h"
 #include "pwm_interface.h"
+
+#define DCM_PERIOD 10
+#define DCM_TIME_UNIT TIME_IN_US
 /**----------------------------------------------------------
  *  GLOBAL DATA
  *----------------------------------------------------------*/
@@ -38,7 +41,7 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
 	
 	st_gpio_cfg_t str_pins_used;
 	
-	str_pins_used.current = PIN_CURRENT_2MA;
+	str_pins_used.current = PIN_CURRENT_8MA;
 	str_pins_used.pin_cfg = OUTPUT;
 	for (uint8_t_ counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
 	{
@@ -139,7 +142,7 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
 					}
 					else
 					{
-						/*enu_return_value = DCM_OK*/
+						/*enu_return_value = DCM_OK*/  
 					}
 				}
 			}
@@ -167,13 +170,13 @@ enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 	
 	if (uint8_speed <= 100)
 	{
-		if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_1, uint8_speed, 10))
+		if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_1, uint8_speed, DCM_PERIOD, DCM_TIME_UNIT))
 		{
 			enu_return_value = DCM_NOK;
 		}
 		else
 		{
-			if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_2, uint8_speed, 10))
+			if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_2, uint8_speed, DCM_PERIOD, DCM_TIME_UNIT))
 			{
 				enu_return_value = DCM_NOK;
 			}

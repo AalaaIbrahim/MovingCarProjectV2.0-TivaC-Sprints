@@ -35,7 +35,7 @@ en_led_error_t_ led_init(en_led_port_t_ en_a_led_port, en_led_pin_t_ en_a_led_pi
         st_gpio_cfg_t st_gpio_cfg_led = {
                 .port = (en_gpio_port_t) en_a_led_port,
                 .pin = (en_gpio_pin_t) en_a_led_pin,
-                .current = PIN_CURRENT_2MA,
+                .current = PIN_CURRENT_4MA,
                 .pin_cfg = OUTPUT
         };
         en_gpio_error_t en_dio_error = gpio_pin_init(&st_gpio_cfg_led);

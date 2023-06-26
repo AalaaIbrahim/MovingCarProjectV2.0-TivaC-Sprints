@@ -60,26 +60,11 @@ en_app_status_t app_init()
 {
     en_app_status_t en_app_status_retval = APP_OK;
 
-    // global vars
-
-
-
-
-
     // init DCM
     if(DCM_OK != dcm_init())
     {
         en_app_status_retval = APP_ERROR;
     }
-
-
-
-
-
-
-
-
-
 
     // init LED x4
     if(LED_OK != led_init(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN))
@@ -105,9 +90,13 @@ en_app_status_t app_init()
         en_app_status_retval = APP_ERROR;
     }
 
-
     // init init stop btn (interrupt)
     if(BUTTON_NOK == button_init(STOP_BTN_PORT, STOP_BTN_PIN, TRUE))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
+
+    if(BUTTON_NOK == button_set_callback(STOP_BTN_PORT, STOP_BTN_PIN, app_stop_btn_callback))
     {
         en_app_status_retval = APP_ERROR;
     }
@@ -165,6 +154,9 @@ void app_start()
 			/* Enable the delay */
 			delay_shutdown(FALSE);
 
+            /* Turn on the stop led */
+            led_on(STOPPED_LED_PORT, STOPPED_LED_PIN);
+
 			/* Wait one second */
 			delay_start(APP_START_TIME, TIME_IN_MS);
 		}
@@ -199,6 +191,7 @@ void app_start()
 
 			/* Start the Car */
 			dcm_start();
+			delay_start(APP_LONG_SIDE_TIME, TIME_IN_MS);
 			delay_start(APP_LONG_SIDE_TIME, TIME_IN_MS);
 
 			/* Turn off the long side LED */
@@ -299,6 +292,6 @@ static void app_stop_btn_callback()
 	delay_shutdown(TRUE);
 	
 	/* Update the Application State */
-	gl_en_current_app_state = APP_STATE_STOPPED;    
+	gl_en_current_app_state = APP_STATE_STOPPED;
 
 } // line 500
