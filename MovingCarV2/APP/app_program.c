@@ -37,11 +37,11 @@ static en_app_state_t gl_en_current_app_state = APP_STATE_IDLE;
 #define STOPPED_LED_PORT        LED_PORT_E
 #define STOPPED_LED_PIN        LED_PIN_1
 
-#define START_BTN_PORT		BTN_PORT_F // Port F
-#define START_BTN_PIN		BTN_PIN_4
+#define START_BTN_PORT		BTN_PORT_B 
+#define START_BTN_PIN		BTN_PIN_6
 
-#define STOP_BTN_PORT		BTN_PORT_F // Port F
-#define STOP_BTN_PIN		BTN_PIN_0
+#define STOP_BTN_PORT		BTN_PORT_D 
+#define STOP_BTN_PIN		BTN_PIN_2
 
 
 
@@ -94,7 +94,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init init start btn
-    //btn_init(START_BTN_PORT, START_BTN_PIN); // todo-hossam
+    button_init(START_BTN_PORT, START_BTN_PIN, FALSE); // todo-hossam
 
 
 
@@ -104,7 +104,7 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init init stop btn (interrupt)
-    //btn_init(STOP_BTN_PORT, STOP_BTN_PIN); // todo-hossam
+    button_init(STOP_BTN_PORT, STOP_BTN_PIN, TRUE); // todo-hossam
 
 
 
@@ -138,16 +138,16 @@ en_app_status_t app_init() // todo-hossam
 
 void app_start() // todo-alaa
 {
-	//en_btn_state_t en_lo_btn_state = BTN_NOT_PRESSED;
+	en_btn_state_t en_lo_btn_state = BUTTON_RELEASED;
 
 	while (TRUE)
 	{
 		if (APP_STATE_IDLE == gl_en_current_app_state)
 		{
 			// check start btn
-			//en_lo_btn_state = btn_read();
+			button_get_state(START_BTN_PORT, START_BTN_PIN, &en_lo_btn_state);
 
-			if (/* BTN_PRESSED == en_lo_btn_state */ TRUE)
+			if (BUTTON_PRESSED == en_lo_btn_state)
 			{
 				/* Update the Application State */
 				gl_en_current_app_state = APP_STATE_START;
