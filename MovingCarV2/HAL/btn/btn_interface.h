@@ -4,7 +4,7 @@
 #include "bit_math.h"
 #include "gpio_interface.h"
 
-
+#define BTN_DEBOUNCE_MS_TIME 200
 typedef enum
 {
 	BUTTON_RELEASED = 0,
