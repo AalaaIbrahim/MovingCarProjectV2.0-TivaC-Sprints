@@ -9,6 +9,7 @@ include_directories(MovingCarV2/HAL/btn)
 include_directories(MovingCarV2/HAL/led)
 include_directories(MovingCarV2/HAL/delay)
 include_directories(MovingCarV2/HAL/pwm)
+include_directories(MovingCarV2/HAL/dcm)
 include_directories(MovingCarV2/LIB)
 include_directories(MovingCarV2/MCAL)
 include_directories(MovingCarV2/MCAL/gpio)
@@ -44,5 +45,10 @@ add_executable(shared
         MovingCarV2/HAL/delay/delay_program.c
 
         MovingCarV2/HAL/delay/delay_interface.h
+
+        MovingCarV2/HAL/dcm/dcm_program.c
+        MovingCarV2/HAL/dcm/dcm_cfg.c
+        MovingCarV2/HAL/dcm/dcm_cfg.h
+        MovingCarV2/HAL/dcm/dcm_interface.h
 
         )

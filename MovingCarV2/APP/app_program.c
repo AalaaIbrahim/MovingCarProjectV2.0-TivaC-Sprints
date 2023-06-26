@@ -56,7 +56,7 @@ static en_app_state_t gl_en_current_app_state = APP_STATE_IDLE;
 
 
 
-en_app_status_t app_init() // todo-hossam
+en_app_status_t app_init()
 {
     en_app_status_t en_app_status_retval = APP_OK;
 
@@ -67,7 +67,10 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init DCM
-    dcm_init(); // todo-hossam
+    if(DCM_OK != dcm_init())
+    {
+        en_app_status_retval = APP_ERROR;
+    }
 
 
 
@@ -79,38 +82,35 @@ en_app_status_t app_init() // todo-hossam
 
 
     // init LED x4
-    led_init(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN);
-    led_init(SHORT_SIDE_LED_PORT, SHORT_SIDE_LED_PIN);
-    led_init(ROTATING_LED_PORT, ROTATING_LED_PIN);
-    led_init(STOPPED_LED_PORT, STOPPED_LED_PIN);
-
-
-
-
-
-
-
-
-
+    if(LED_OK != led_init(LONG_SIDE_LED_PORT, LONG_SIDE_LED_PIN))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
+    if(LED_OK != led_init(SHORT_SIDE_LED_PORT, SHORT_SIDE_LED_PIN))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
+    if(LED_OK != led_init(ROTATING_LED_PORT, ROTATING_LED_PIN))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
+    if(LED_OK != led_init(STOPPED_LED_PORT, STOPPED_LED_PIN))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
 
     // init init start btn
-    button_init(START_BTN_PORT, START_BTN_PIN, FALSE); // todo-hossam
-
-
-
-
-
-
+    if(BUTTON_NOK == button_init(START_BTN_PORT, START_BTN_PIN, FALSE))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
 
 
     // init init stop btn (interrupt)
-    button_init(STOP_BTN_PORT, STOP_BTN_PIN, TRUE); // todo-hossam
-
-
-
-
-
-
+    if(BUTTON_NOK == button_init(STOP_BTN_PORT, STOP_BTN_PIN, TRUE))
+    {
+        en_app_status_retval = APP_ERROR;
+    }
 
     return en_app_status_retval;
 } // line 116
@@ -136,7 +136,7 @@ en_app_status_t app_init() // todo-hossam
 
 
 
-void app_start() // todo-alaa
+void app_start()
 {
 	en_btn_state_t en_lo_btn_state = BUTTON_RELEASED;
 
@@ -293,77 +293,12 @@ void app_start() // todo-alaa
 
 
 
-static void app_stop_btn_callback() // todo-alaa
+static void app_stop_btn_callback()
 {
-	/* Stop any on-going delay */
+	/* Stop any ongoing delay */
 	delay_shutdown(TRUE);
 	
 	/* Update the Application State */
-	gl_en_current_app_state = APP_STATE_STOPPED;
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	gl_en_current_app_state = APP_STATE_STOPPED;    
 
 } // line 500
