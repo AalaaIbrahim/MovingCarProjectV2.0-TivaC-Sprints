@@ -9,14 +9,14 @@
  * @return ERROR_OK 		 : If the initialization is successful
  * 				 BUTTON_NOK		 : If any of the arguments is invalid
  */
-enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, boolean bool_a_int_enabled)
+enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, boolean bool_a_int_enabled)
 {
 
 	enu_error_status_t_ enu_error = ERROR_OK;
 	st_gpio_cfg_t st_lo_btn_pin_cfg;
 	
-	st_lo_btn_pin_cfg.port = en_a_gpio_port;
-	st_lo_btn_pin_cfg.pin  = en_a_gpio_pin;
+	st_lo_btn_pin_cfg.port = (en_gpio_port_t)en_a_gpio_port;
+	st_lo_btn_pin_cfg.pin  = (en_gpio_pin_t)en_a_gpio_pin;
 	st_lo_btn_pin_cfg.pin_cfg = INPUT_PULL_DOWN;
 
 	enu_error = (enu_error_status_t_)gpio_pin_init(&st_lo_btn_pin_cfg);
@@ -32,7 +32,7 @@ enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_
     if(bool_a_int_enabled == TRUE)
     {
 
-        if(GPIO_OK != gpio_enableInt(en_a_gpio_port, en_a_gpio_pin))
+        if(GPIO_OK != gpio_enableInt((en_gpio_port_t)en_a_gpio_port, (en_gpio_pin_t)en_a_gpio_pin))
         {
             enu_error = BUTTON_NOK;
         }
@@ -48,38 +48,6 @@ enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  *
  * @param en_a_gpio_port
@@ -87,13 +55,13 @@ enu_error_status_t_ button_init(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_
  * @param ptr_en_a_button_state
  * @return
  */
-enu_error_status_t_ button_get_state(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state)
+enu_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state)
 {
 	enu_error_status_t_ enu_error_status_retval = ERROR_OK;
     en_gpio_pin_level_t en_l_gpio_pin_level = LOW;
 
 
-    if(GPIO_OK == gpio_getPinVal (en_a_gpio_port, en_a_gpio_pin, &en_l_gpio_pin_level))
+    if(GPIO_OK == gpio_getPinVal ((en_gpio_port_t)en_a_gpio_port, (en_gpio_pin_t)en_a_gpio_pin, &en_l_gpio_pin_level))
     {
         // debounce
         if(HIGH == en_l_gpio_pin_level)
@@ -118,11 +86,11 @@ enu_error_status_t_ button_get_state(en_gpio_port_t en_a_gpio_port, en_gpio_pin_
 	return enu_error_status_retval;
 }
 
-enu_error_status_t_ button_set_callback(en_gpio_port_t en_a_gpio_port, en_gpio_pin_t en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun)
+enu_error_status_t_ button_set_callback(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun)
 {
     enu_error_status_t_ enu_l_error_status = ERROR_OK;
 
-    if(GPIO_OK != gpio_setIntCallback(en_a_gpio_port, en_a_gpio_pin, ptr_a_callback_fun))
+    if(GPIO_OK != gpio_setIntCallback((en_gpio_port_t)en_a_gpio_port, (en_gpio_pin_t)en_a_gpio_pin, ptr_a_callback_fun))
     {
             enu_l_error_status = BUTTON_NOK;
     }
