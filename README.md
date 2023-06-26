@@ -11,15 +11,16 @@
 > Suppose you have a four-driving wheel robot, design the system so that the car moves in a rectangular shape.
 
 ## Quick Links
-- `Video` 👉 [Youtube]()
-- `Project Hex` 👉 []()
-- `Documentation` 👉 [Google Docs]() 👉 [PDF]()
-- `Team Backlog / Test Protocol` 👉 [Google Sheets]() 👉 [Excel]() 
+- `Team Video` 👉 Youtube - Uploading
+- `POC Video` 👉 [Youtube](https://youtu.be/Pj_y2K3Dnls)
+- `Project Hex` 👉 [MovingCarV2/Objects/MovingCarV2.hex](MovingCarV2/Objects/MovingCarV2.hex)
+- `Documentation` 👉 [Google Docs](https://docs.google.com/document/d/1yhK6WgYVKUstWifEu1GudPAE5vEF-KtlVJLO-U92nLs/edit?usp=sharing) 👉 [PDF](Documents/ARM%20-%20Moving%20Car%20-%20Team%201%20-%20Documentation.pdf)
+- `Team Backlog / Test Protocol` 👉 [Google Sheets](https://docs.google.com/spreadsheets/d/17WS5LQc-BO3WopfbmlOptUQgZsWmIcg5GQP5RzGpZdQ/edit?usp=sharing) 👉 [Excel](Documents/ARM%20-%20Moving%20Car%20-%20Team%201%20-%20backlog%20and%20test%20protocol.xlsx) 
 
 ----
 ## Requirements
 ### Car Components
-1. Use Sprints Kit with TivaC launch pad plugged in
+1. Use Sprints Kit with Tiva-C launch pad plugged in
 2. You will develop your application on the ARM microcontroller
 3. Four motors (M1, M2, M3, M4)
 4. One button to start (PB1)
