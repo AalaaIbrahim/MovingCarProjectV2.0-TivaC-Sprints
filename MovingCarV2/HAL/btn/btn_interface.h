@@ -43,7 +43,7 @@ typedef enum {
 	ERROR_OK = 0,
 	PASSING_NULL_PTR,
 	BUTTON_NOK
-}enu_error_status_t_;
+}en_error_status_t_;
 
 /**
  * Function to initialize a push button on the given pin
@@ -52,7 +52,7 @@ typedef enum {
  * @return ERROR_OK 		 : If the initialization is successful
  * 				 BUTTON_NOK		 : If any of the arguments is invalid
  */
-enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, boolean bool_a_int_enabled);
+en_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, boolean bool_a_int_enabled);
 
 /**
  *
@@ -61,8 +61,8 @@ enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_
  * @param ptr_en_a_button_state
  * @return
  */
-enu_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state);
+en_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state);
 
-enu_error_status_t_ button_set_callback(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun);
+en_error_status_t_ button_set_callback(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun);
 
 #endif 

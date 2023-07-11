@@ -27,14 +27,14 @@ typedef enum
 	DCM_WRONG_DCM_NUMBER,
 	DCM_WRONG_DIRECTION,
 	DCM_NOK
-}enu_dcm_error_t_;
+}en_dcm_error_t_;
 
 /*-----------------------_DCM_DIRECTOINS_-----------------------*/
 typedef enum 
 {
 	DCM_CW = 0,
 	DCM_ACW
-}enu_dcm_direction_t_;
+}en_dcm_direction_t_;
 
 /*-----------------------_DCM_PORTS_-----------------------*/
 typedef enum
@@ -46,7 +46,7 @@ typedef enum
 	DCM_PORT_E,
 	DCM_PORT_F,
 	DCM_PORT_TOTAL
-}enu_dcm_port_t_;
+}en_dcm_port_t_;
 
 /*-----------------------_DCM_PINS_-----------------------*/
 typedef enum
@@ -60,16 +60,16 @@ typedef enum
 	DCM_PIN_6		,
 	DCM_PIN_7		,
 	DCM_PIN_TOTAL
-}enu_dcm_pin_t_;
+}en_dcm_pin_t_;
   
 /*-------------------------_LINKING_CONFIGURATION_STRUCTURE_DATA_TYPE_-------------------------*/	
 typedef struct
 {
 	uint8_t_ 				uint8_dcm_number;
-	enu_dcm_port_t_			enu_dcm_port_number_0;
-	enu_dcm_pin_t_			enu_dcm_pin_number_0;
-	enu_dcm_port_t_			enu_dcm_port_number_1;
-	enu_dcm_pin_t_			enu_dcm_pin_number_1;
+	en_dcm_port_t_			en_dcm_port_number_0;
+	en_dcm_pin_t_			en_dcm_pin_number_0;
+	en_dcm_port_t_			en_dcm_port_number_1;
+	en_dcm_pin_t_			en_dcm_pin_number_1;
 }str_dcm_config_t_;
 
 /**----------------------------------------------------------
@@ -83,20 +83,20 @@ typedef struct
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_NOK								:	In case of failure
  */
-enu_dcm_error_t_ dcm_init(void);
+en_dcm_error_t_ dcm_init(void);
 
 
 /**
  *	@brief				Sets Directions for the a specific DCM
  *	@param [in]		uint8_dcm_index				:	motor's number
- *	@param [in]		enu_direction					:	motor's direction
+ *	@param [in]		en_direction					:	motor's direction
  *	@param [out]	none	
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_WRONG_DIRECTION		:	In case of sending wrong direction
  * 	@return				DCM_WRONG_DCM_NUMBER	:	In case of sending wrong DCM number
  *	@return				DCM_NOK								:	In case of failure
  */
- enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction);
+ en_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, en_dcm_direction_t_ en_direction);
 
 
 /**
@@ -106,7 +106,7 @@ enu_dcm_error_t_ dcm_init(void);
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_NOK								:	In case of failure
  */
- enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed);
+ en_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed);
 
 
 /**
@@ -116,7 +116,7 @@ enu_dcm_error_t_ dcm_init(void);
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_NOK								:	In case of failure
  */
- enu_dcm_error_t_ dcm_start	(void);
+ en_dcm_error_t_ dcm_start	(void);
 
 
 /**
@@ -126,7 +126,7 @@ enu_dcm_error_t_ dcm_init(void);
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_NOK								:	In case of failure
  */
-enu_dcm_error_t_ dcm_stop (void);
+en_dcm_error_t_ dcm_stop (void);
 
 
 #endif /* DCM_INTERFACE_H_ */

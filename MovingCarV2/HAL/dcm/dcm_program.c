@@ -35,9 +35,9 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
  *	@return				DCM_OK						:	In case of success
  *	@return				DCM_NOK						:	In case of failure
  */
- enu_dcm_error_t_ dcm_init (void)
+ en_dcm_error_t_ dcm_init (void)
 {
-	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	en_dcm_error_t_ en_return_value = DCM_OK;
 	
 	st_gpio_cfg_t str_pins_used;
 	
@@ -45,21 +45,21 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
 	str_pins_used.pin_cfg = OUTPUT;
 	for (uint8_t_ counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
 	{
-		str_pins_used.port = str_dcm_config[counter].enu_dcm_port_number_0;
-		str_pins_used.pin = str_dcm_config[counter].enu_dcm_pin_number_0;
+		str_pins_used.port = str_dcm_config[counter].en_dcm_port_number_0;
+		str_pins_used.pin = str_dcm_config[counter].en_dcm_pin_number_0;
 			
 		if (GPIO_OK != gpio_pin_init(&str_pins_used))
 		{
-			enu_return_value = DCM_NOK;
+			en_return_value = DCM_NOK;
 			break;
 		}
 		else
 		{
-			str_pins_used.port = str_dcm_config[counter].enu_dcm_port_number_1;
-			str_pins_used.pin = str_dcm_config[counter].enu_dcm_pin_number_1;
+			str_pins_used.port = str_dcm_config[counter].en_dcm_port_number_1;
+			str_pins_used.pin = str_dcm_config[counter].en_dcm_pin_number_1;
 			if (GPIO_OK != gpio_pin_init(&str_pins_used))
 			{
-				enu_return_value = DCM_NOK;
+				en_return_value = DCM_NOK;
 				break;
 			}
 			else
@@ -69,91 +69,91 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
 		}
 	}
 	
-	if (DCM_OK == enu_return_value)
+	if (DCM_OK == en_return_value)
 	{
 		if (PWM_OK != pwm_init())
 		{
-			enu_return_value = DCM_NOK;
+			en_return_value = DCM_NOK;
 		}
 		else
 		{
-			/*enu_return_value = DCM_OK*/
+			/*en_return_value = DCM_OK*/
 		}
 	}
 	else
 	{
 		/*DCM_NOK*/
 	}
-	return enu_return_value;
+	return en_return_value;
 	
 }
 
 /**
  *	@brief				Sets Directions for the a specific DCM
  *	@param [in]		uint8_dcm_index				:	motor's number
- *	@param [in]		enu_direction					:	motor's direction
+ *	@param [in]		en_direction					:	motor's direction
  *	@param [out]	none	
  *	@return				DCM_OK								:	In case of success
  *	@return				DCM_WRONG_DIRECTION		:	In case of sending wrong direction
  * 	@return				DCM_WRONG_DCM_NUMBER	:	In case of sending wrong DCM number
  *	@return				DCM_NOK								:	In case of failure
  */
- enu_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, enu_dcm_direction_t_ enu_direction)
+ en_dcm_error_t_ dcm_set_direction(uint8_t_ uint8_dcm_index, en_dcm_direction_t_ en_direction)
 {
-	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	en_dcm_error_t_ en_return_value = DCM_OK;
 	
 	for (uint8_t_ counter = 0; counter < NUMBER_OF_DCMS_USED; counter++)
 	{
-		enu_return_value = DCM_WRONG_DCM_NUMBER;
+		en_return_value = DCM_WRONG_DCM_NUMBER;
 		if (uint8_dcm_index == str_dcm_config[counter].uint8_dcm_number)
 		{
-			enu_return_value = DCM_OK;
-			if(DCM_CW == enu_direction)
+			en_return_value = DCM_OK;
+			if(DCM_CW == en_direction)
 			{
-				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_0, str_dcm_config[counter].enu_dcm_pin_number_0,HIGH))
+				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].en_dcm_port_number_0, str_dcm_config[counter].en_dcm_pin_number_0,HIGH))
 				{
-					enu_return_value = DCM_NOK;
+					en_return_value = DCM_NOK;
 				}
 				else
 				{
-					/*enu_return_value = DCM_OK*/
-					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_1, str_dcm_config[counter].enu_dcm_pin_number_1,LOW))
+					/*en_return_value = DCM_OK*/
+					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].en_dcm_port_number_1, str_dcm_config[counter].en_dcm_pin_number_1,LOW))
 					{
-						enu_return_value = DCM_NOK;
+						en_return_value = DCM_NOK;
 					}
 					else
 					{
-						/*enu_return_value = DCM_OK*/
+						/*en_return_value = DCM_OK*/
 					}
 				}
 			}
-			else if (DCM_ACW == enu_direction)
+			else if (DCM_ACW == en_direction)
 			{
-				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_0, str_dcm_config[counter].enu_dcm_pin_number_0,LOW))
+				if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].en_dcm_port_number_0, str_dcm_config[counter].en_dcm_pin_number_0,LOW))
 				{
-					enu_return_value = DCM_NOK;
+					en_return_value = DCM_NOK;
 				}
 				else
 				{
-					/*enu_return_value = DCM_OK*/
-					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].enu_dcm_port_number_1, str_dcm_config[counter].enu_dcm_pin_number_1,HIGH))
+					/*en_return_value = DCM_OK*/
+					if (GPIO_OK != gpio_setPinVal(str_dcm_config[counter].en_dcm_port_number_1, str_dcm_config[counter].en_dcm_pin_number_1,HIGH))
 					{
-						enu_return_value = DCM_NOK;
+						en_return_value = DCM_NOK;
 					}
 					else
 					{
-						/*enu_return_value = DCM_OK*/  
+						/*en_return_value = DCM_OK*/
 					}
 				}
 			}
 			else
 			{
-				enu_return_value = DCM_WRONG_DIRECTION;
+				en_return_value = DCM_WRONG_DIRECTION;
 			}
 			break;
 		}
 	}
-	return enu_return_value;
+	return en_return_value;
 }
 
 
@@ -164,21 +164,21 @@ extern const str_dcm_config_t_ str_dcm_config [NUMBER_OF_DCMS_USED];
  *	@return				DCM_OK							:	In case of success
  *	@return				DCM_NOK							:	In case of failure
  */
-enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
+en_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 {
-	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	en_dcm_error_t_ en_return_value = DCM_OK;
 	
 	if (uint8_speed <= 100)
 	{
 		if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_1, uint8_speed, DCM_PERIOD, DCM_TIME_UNIT))
 		{
-			enu_return_value = DCM_NOK;
+			en_return_value = DCM_NOK;
 		}
 		else
 		{
 			if(DCM_OK != pwm_adjust_signal(PWM_CHANNEL_2, uint8_speed, DCM_PERIOD, DCM_TIME_UNIT))
 			{
-				enu_return_value = DCM_NOK;
+				en_return_value = DCM_NOK;
 			}
 			else
 			{
@@ -188,10 +188,10 @@ enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
 	}
 	else
 	{
-		enu_return_value = DCM_NOK;
+		en_return_value = DCM_NOK;
 	}
 	
-	return enu_return_value;
+	return en_return_value;
 }
 
 
@@ -202,26 +202,26 @@ enu_dcm_error_t_ dcm_speed	(uint8_t_ uint8_speed)
  *	@return				DCM_OK							:	In case of success
  *	@return				DCM_NOK							:	In case of failure
  */
-enu_dcm_error_t_ dcm_start (void)
+en_dcm_error_t_ dcm_start (void)
 {
-	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	en_dcm_error_t_ en_return_value = DCM_OK;
 	
 	if (PWM_OK != pwm_start(PWM_CHANNEL_1))
 	{
-		enu_return_value = DCM_NOK;
+		en_return_value = DCM_NOK;
 	}
 	else
 	{
 		if (PWM_OK != pwm_start(PWM_CHANNEL_2))
 		{
-			enu_return_value = DCM_NOK;
+			en_return_value = DCM_NOK;
 		}
 		else
 		{
 			/*DCM_OK*/
 		}
 	}
-	return enu_return_value;
+	return en_return_value;
 }
 
 
@@ -232,19 +232,19 @@ enu_dcm_error_t_ dcm_start (void)
  *	@return				DCM_OK							:	In case of success
  *	@return				DCM_NOK							:	In case of failure
  */
-enu_dcm_error_t_ dcm_stop	(void)
+en_dcm_error_t_ dcm_stop	(void)
 {
-	enu_dcm_error_t_ enu_return_value = DCM_OK;
+	en_dcm_error_t_ en_return_value = DCM_OK;
 	
 	if (pwm_stop(PWM_CHANNEL_1))
 	{
-		enu_return_value = DCM_NOK;
+		en_return_value = DCM_NOK;
 	}
 	else
 	{
 		if (pwm_stop(PWM_CHANNEL_1))
 		{
-			enu_return_value = DCM_NOK;
+			en_return_value = DCM_NOK;
 		}
 		else
 		{
@@ -252,7 +252,7 @@ enu_dcm_error_t_ dcm_stop	(void)
 		}
 	}
 	
-	return enu_return_value;
+	return en_return_value;
 }
 /**----------------------------------------------------------
  *  END OF FILE: dcm_program.c

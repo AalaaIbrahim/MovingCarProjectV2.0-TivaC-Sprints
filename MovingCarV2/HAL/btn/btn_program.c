@@ -9,21 +9,21 @@
  * @return ERROR_OK 		 : If the initialization is successful
  * 				 BUTTON_NOK		 : If any of the arguments is invalid
  */
-enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, boolean bool_a_int_enabled)
+en_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, boolean bool_a_int_enabled)
 {
 
-	enu_error_status_t_ enu_error = ERROR_OK;
+	en_error_status_t_ en_error = ERROR_OK;
 	st_gpio_cfg_t st_lo_btn_pin_cfg;
 	
 	st_lo_btn_pin_cfg.port = (en_gpio_port_t)en_a_gpio_port;
 	st_lo_btn_pin_cfg.pin  = (en_gpio_pin_t)en_a_gpio_pin;
 	st_lo_btn_pin_cfg.pin_cfg = INPUT_PULL_DOWN;
 
-	enu_error = (enu_error_status_t_)gpio_pin_init(&st_lo_btn_pin_cfg);
+	en_error = (en_error_status_t_)gpio_pin_init(&st_lo_btn_pin_cfg);
 	
-	if(ERROR_OK != enu_error)
+	if(ERROR_OK != en_error)
 	{
-		enu_error = BUTTON_NOK;
+		en_error = BUTTON_NOK;
 	}
 	else
 	{
@@ -34,11 +34,11 @@ enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_
 
         if(GPIO_OK != gpio_enableInt((en_gpio_port_t)en_a_gpio_port, (en_gpio_pin_t)en_a_gpio_pin))
         {
-            enu_error = BUTTON_NOK;
+            en_error = BUTTON_NOK;
         }
 
     }
-	return enu_error;
+	return en_error;
 }
 
 
@@ -55,9 +55,9 @@ enu_error_status_t_ button_init(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_
  * @param ptr_en_a_button_state
  * @return
  */
-enu_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state)
+en_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, en_btn_state_t *ptr_en_a_button_state)
 {
-	enu_error_status_t_ enu_error_status_retval = ERROR_OK;
+	en_error_status_t_ en_error_status_retval = ERROR_OK;
     en_gpio_pin_level_t en_l_gpio_pin_level = LOW;
 
 
@@ -68,7 +68,7 @@ enu_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t
         {
             if(DELAY_ERROR == delay_start(BTN_DEBOUNCE_MS_TIME, TIME_IN_MS))
             {
-                enu_error_status_retval = BUTTON_NOK;
+                en_error_status_retval = BUTTON_NOK;
             }
 
             *ptr_en_a_button_state = BUTTON_PRESSED;
@@ -80,24 +80,24 @@ enu_error_status_t_ button_get_state(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t
     }
     else
     {
-        enu_error_status_retval = BUTTON_NOK;
+        en_error_status_retval = BUTTON_NOK;
     }
 
-	return enu_error_status_retval;
+	return en_error_status_retval;
 }
 
-enu_error_status_t_ button_set_callback(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun)
+en_error_status_t_ button_set_callback(en_btn_port_t_ en_a_gpio_port, en_btn_pin_t_ en_a_gpio_pin, ptr_callback_fun_t ptr_a_callback_fun)
 {
-    enu_error_status_t_ enu_l_error_status = ERROR_OK;
+    en_error_status_t_ en_l_error_status = ERROR_OK;
 
     if(GPIO_OK != gpio_setIntCallback((en_gpio_port_t)en_a_gpio_port, (en_gpio_pin_t)en_a_gpio_pin, ptr_a_callback_fun))
     {
-            enu_l_error_status = BUTTON_NOK;
+            en_l_error_status = BUTTON_NOK;
     }
     else
     {
         /* Do Nothing */
     }
 
-    return enu_l_error_status;
+    return en_l_error_status;
 }
