@@ -11,7 +11,7 @@
 > Suppose you have a four-driving wheel robot, design the system so that the car moves in a rectangular shape.
 
 ## Quick Links
-- `Team Video` 👉 Youtube - Uploading
+- `Team Video` 👉 [Youtube](https://youtu.be/yTYDkABTcIQ)
 - `POC Video` 👉 [Youtube](https://youtu.be/Pj_y2K3Dnls)
 - `Project Hex` 👉 [MovingCarV2/Objects/MovingCarV2.hex](MovingCarV2/Objects/MovingCarV2.hex)
 - `Documentation` 👉 [Google Docs](https://docs.google.com/document/d/1yhK6WgYVKUstWifEu1GudPAE5vEF-KtlVJLO-U92nLs/edit?usp=sharing) 👉 [PDF](Documents/ARM%20-%20Moving%20Car%20-%20Team%201%20-%20Documentation.pdf)
